@@ -1,0 +1,824 @@
+[ec2-user@ip-172-31-13-228 nova-2-sonic-standalone-kiro]$ history
+    1  ping -c 2 google.com
+    2  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+    3  ping -c 2 google.com
+    4  sudo yum update -y
+    5  sudo yum install -y git
+    6  curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+    7  sudo yum install -y nodejs
+    8  node -v
+    9  git --version
+   10  git clone https://github.com/abdulWaquarAcc/voicebot-nova-sonic.git ~/app
+   11  cd ~/app
+   12  npm install
+   13  npm run build
+   14  export HOST=0.0.0.0
+   15  export AWS_REGION=us-east-1
+   16  npm start
+   17  sudo yum update -y
+   18  sudo yum install -y git
+   19  curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+   20  sudo yum install -y nodejs
+   21  node -v
+   22  export HOST=0.0.0.0
+   23  export AWS_REGION=us-east-1
+   24  npm start
+   25  ls
+   26  cd app/
+   27  export HOST=0.0.0.0
+   28  export AWS_REGION=us-east-1
+   29  npm start
+   30  cd app/
+   31  npm start
+   32  npm run build
+   33  npm start
+   34  cd app
+   35  export HOST=0.0.0.0
+   36  export AWS_REGION=us-east-1
+   37  npm start
+   38  openssl
+   39  npm i pm2
+   40  cd app/
+   41  npm i pm2
+   42  sudo npm i pm2
+   43  ping -c 2 google.com
+   44  hostory
+   45  history
+   46    echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+   47  ping -c 2 google.com
+   48  ls
+   49  npm i pm2
+   50  pm2 start dist/server.js
+   51   npm install pm2 -g
+   52  sudo  npm install pm2 -g
+   53  sudo pm2 logs
+   54  sudo pm2 start dist/server.js
+   55  sudo pm2 logs
+   56  export HOST=0.0.0.0
+   57  export AWS_REGION=us-east-1
+   58  sudo pm2 start dist/server.js
+   59  sudo pm2 list
+   60  sudo pm2 stop server
+   61  sudo pm2 delete server
+   62  export HOST=0.0.0.0
+   63  export AWS_REGION=us-east-1
+   64  sudo pm2 start dist/server.js
+   65  sudo pm2 logs
+   66  export HOST=0.0.0.0
+   67  export AWS_REGION=us-east-1
+   68  npm start
+   69  cd app/
+   70  export HOST=0.0.0.0
+   71  export AWS_REGION=us-east-1
+   72  npm start
+   73  sudo pm2 list
+   74  sudo pm2 stop server
+   75  sudo pm2 delete server
+   76  sudo pm2 logs
+   77  sudo pm2 list
+   78  export HOST=0.0.0.0
+   79  export AWS_REGION=us-east-1
+   80  npm start
+   81  sudo mkdir -p /etc/ssl/private
+   82  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048   -keyout /etc/ssl/private/selfsigned.key   -out /etc/ssl/certs/selfsigned.crt   -subj "/CN=localhost"
+   83  sudo yum install -y nginx
+   84  ls
+   85  ping -c 2 google.com
+   86  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+   87  ping -c 2 google.com
+   88  # Generate self-signed certificate
+   89  sudo mkdir -p /etc/ssl/private
+   90  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048   -keyout /etc/ssl/private/selfsigned.key   -out /etc/ssl/certs/selfsigned.crt   -subj "/CN=localhost"
+   91  sudo yum install -y nginx
+   92  sudo tee /etc/nginx/conf.d/voicebot.conf > /dev/null << 'EOF'
+   93  server {
+   94      listen 443 ssl;
+   95      server_name _;
+   96      ssl_certificate /etc/ssl/certs/selfsigned.crt;
+   97      ssl_certificate_key /etc/ssl/private/selfsigned.key;
+   98      location / {
+   99          proxy_pass http://127.0.0.1:3000;
+  100          proxy_http_version 1.1;
+  101          proxy_set_header Upgrade $http_upgrade;
+  102          proxy_set_header Connection "upgrade";
+  103          proxy_set_header Host $host;
+  104          proxy_set_header X-Real-IP $remote_addr;
+  105          proxy_read_timeout 86400;
+  106      }
+  107  }
+  108  server {
+  109      listen 80;
+  110      server_name _;
+  111      return 301 https://$host$request_uri;
+  112  }
+  113  EOF
+  114  sudo systemctl start nginx
+  115  sudo systemctl enable nginx
+  116  export HOST=0.0.0.0
+  117  export AWS_REGION=us-east-1
+  118  npm start
+  119  cd app
+  120  export HOST=0.0.0.0
+  121  export AWS_REGION=us-east-1
+  122  npm start
+  123  export HOST=0.0.0.0
+  124  export AWS_REGION=us-east-1
+  125  npm start
+  126  export HOST=0.0.0.0
+  127  export AWS_REGION=us-east-1
+  128  npm start
+  129  export HOST=0.0.0.0
+  130  export AWS_REGION=us-east-1
+  131  npm start
+  132  ls
+  133  cd app
+  134  ls
+  135  ping -c 2 google.com
+  136  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  137  ping -c 2 google.com
+  138  export HOST=0.0.0.0
+  139  export AWS_REGION=us-east-1
+  140  npm start
+  141  sudo npm install -g pm2
+  142  pm2 start dist/server.js --name voicebot --env HOST=0.0.0.0 --env AWS_REGION=us-east-1
+  143  pm2 startup
+  144  sudo pm2 logs
+  145  sudo pm2 stop
+  146  sudo pm2 stop voicebot
+  147  sudo pm2 list
+  148  sudo pm2 logs
+  149  sudo pm2 list
+  150  git pull
+  151  git --version
+  152  git pull
+  153  ping -c 2 google.com
+  154  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  155  git pull
+  156  pm2 restart voicebot
+  157  pm2 stop voicebot
+  158  history
+  159  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  160  sudo chattr +i /etc/resolv.conf
+  161  exit
+  162  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  163  ping -c 2 google.com
+  164  pm2 start voicebot
+  165  cd app
+  166  pm2 start voicebot
+  167  pm2 start dist/server.js --name voicebot --env HOST=0.0.0.0 --env AWS_REGION=us-east-1
+  168  pm2 logs
+  169  pm2 list
+  170  pm2 stop voicebot
+  171  pm2 start voicebot
+  172  pm2 logs
+  173  pm2 stop voicebot
+  174  pm2 list
+  175  exit
+  176  pm2 list
+  177  pm2 start voicebot
+  178  pm2 start dist/server.js --name voicebot --env HOST=0.0.0.0 --env AWS_REGION=us-east-1
+  179  cd app
+  180  pm2 start voicebot
+  181  pm2 start dist/server.js --name voicebot --env HOST=0.0.0.0 --env AWS_REGION=us-east-1
+  182  pm2 list
+  183  pm2 logs
+  184  HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  185  cd app/
+  186  HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  187  pm2 list
+  188  pm2 delete voicebot
+  189  HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  190  pm2 logs
+  191  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048   -keyout /etc/nginx/self-signed.key   -out /etc/nginx/self-signed.crt   -subj "/CN=100.27.36.130"
+  192  server {
+  193      listen 443 ssl;
+  194      server_name 100.27.36.130;
+  195      ssl_certificate     /etc/nginx/self-signed.crt;
+  196      ssl_certificate_key /etc/nginx/self-signed.key;
+  197      location / {
+  198          proxy_pass http://localhost:3000;
+  199          proxy_http_version 1.1;
+  200          proxy_set_header Upgrade $http_upgrade;
+  201          proxy_set_header Connection "upgrade";
+  202          proxy_set_header Host $host;
+  203          proxy_set_header X-Real-IP $remote_addr;
+  204          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  205          proxy_set_header X-Forwarded-Proto $scheme;
+  206          proxy_read_timeout 86400;
+  207          proxy_send_timeout 86400;
+  208      }
+  209  }
+  210  sudo nginx -t
+  211  sudo systemctl restart nginx
+  212  pm2 delete voicebot
+  213  HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  214  pm2 logs
+  215  pm2 list
+  216  pm2 delete voicebot
+  217  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  218  ping -c 2 google.com
+  219
+  220  ssh -i "lp_nextgen_ccs_nova2sonic.pem" ec2-user@100.27.36.130
+  221  pm2 list
+  222  export HOST=0.0.0.0
+  223  export AWS_REGION=us-east-1
+  224  npm start
+  225  npm run build
+  226  export HOST=0.0.0.0
+  227  export AWS_REGION=us-east-1
+  228  npm start
+  229  export HOST=0.0.0.0
+  230  export AWS_REGION=us-east-1
+  231  npm start
+  232  npm run build
+  233  HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  234  pm2 logs
+  235  pm2 delete voicebot
+  236  export HOST=0.0.0.0
+  237  export AWS_REGION=us-east-1
+  238  npm start
+  239  HOST=0.0.0.0 PORT=3000 npm start
+  240  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  241  ping -c 2 google.com
+  242  aws sts get-caller-identity
+  243  export HOST=0.0.0.0
+  244  export AWS_REGION=us-east-1
+  245  npm start
+  246  export HOST=0.0.0.0
+  247  export AWS_REGION=us-east-1
+  248  npm start
+  249  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  250  pm2 logs
+  251  pm2 stop voicebot
+  252  git pull
+  253  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  254  ping -c 2 google.com
+  255  git pull
+  256  pm2 start voicebot
+  257  git pull
+  258  pm2 start voicebot
+  259  pm2 restart voicebot
+  260  git pull
+  261  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  262  git pull
+  263  pm2 restart voicebot
+  264  pm2 logs
+  265  pm2 delete voicebot
+  266  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  267  pm2 logs
+  268  pm2 delete voicebot
+  269  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  270  ping -c 2 google.com
+  271  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  272  pm2 logs
+  273  cd app
+  274  ping -c 2 google.com
+  275  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  276  ping -c 2 google.com
+  277  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  278  pm2 logs
+  279  pm2 list
+  280  pm2 delete voicebot
+  281  export HOST=0.0.0.0
+  282  export AWS_REGION=us-east-1
+  283  npm start
+  284  pm2 stop voicebot
+  285  pm2 list
+  286  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  287  ping -c 2 google.com
+  288  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  289  pm2 logs
+  290  aws --version
+  291  exit
+  292  ls
+  293  sudo su
+  294  systemctl status mdatp
+  295  systemctl status qualys-cloud-agent.service
+  296  systemctl status taniumclient
+  297  systemctl status qualys-cloud-agent.service
+  298  systemctl status taniumclient
+  299  systemctl status mdatp
+  300  exit
+  301  systemctl status taniumclient
+  302  systemctl status qualys-cloud-agent.service
+  303  systemctl status mdatp
+  304  curl -I https://www.google.com
+  305  ping -c 4 google.com
+  306  ping google.com
+  307  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  308  ping google.com
+  309  history
+  310  systemctl status mdatp
+  311  aws --version
+  312  systemctl status qualys-cloud-agent.service
+  313  sudo bash -c 'echo "supersede domain-name-servers 8.8.8.8, 8.8.4.4;" >> /etc/dhcp/dhclient.conf'
+  314  sudo systemctl restart NetworkManager
+  315  sudo bash -c 'cat > /etc/netplan/99-custom-dns.yaml << EOF
+  316  network:
+  317    version: 2
+  318    ethernets:
+  319      eth0:
+  320        nameservers:
+  321          addresses: [8.8.8.8, 8.8.4.4]
+  322  EOF'
+  323  sudo netplan apply
+  324  sudo systemctl restart network
+  325  sudo dhclient -r eth0 && sudo dhclient eth0
+  326  sudo bash -c 'echo "DNS1=8.8.8.8" >> /etc/sysconfig/network-scripts/ifcfg-eth0'
+  327  sudo bash -c 'echo "DNS2=8.8.4.4" >> /etc/sysconfig/network-scripts/ifcfg-eth0'
+  328  sudo bash -c 'echo "PEERDNS=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0'
+  329  sudo systemctl restart network
+  330  sudo mkdir -p /etc/systemd/resolved.conf.d/
+  331  sudo bash -c 'cat > /etc/systemd/resolved.conf.d/dns.conf << EOF
+  332  [Resolve]
+  333  DNS=8.8.8.8 8.8.4.4
+  334  EOF'
+  335  sudo systemctl restart systemd-resolved
+  336  resolvectl status
+  337  sudo bash -c 'echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" > /etc/resolv.conf'
+  338  sudo chattr +i /etc/resolv.conf
+  339  ping -c 2 google.com
+  340  sudo reboot
+  341  ping -c 2 google.com
+  342  systemctl status qualys-cloud-agent.service
+  343  systemctl status taniumclient
+  344  git pull
+  345  ls
+  346  cd app/
+  347  ls
+  348  git pull
+  349  ping -c 2 google.com
+  350  systemctl status qualys-cloud-agent.service
+  351  systemctl status taniumclient
+  352  systemctl status SplunkForwarder.service
+  353  systemctl status mdatp
+  354  ping google.com
+  355  systemctl status qualys-cloud-agent.service
+  356  systemctl status taniumclient
+  357  systemctl status SplunkForwarder.service
+  358  systemctl status qualys-cloud-agent.service
+  359  systemctl status taniumclient
+  360  systemctl status qualys-cloud-agent.service
+  361  systemctl status taniumclient
+  362  systemctl status SplunkForwarder.service
+  363  sudo yum install -y amazon-ssm-agent
+  364  sudo systemctl enable amazon-ssm-agent
+  365  sudo systemctl start amazon-ssm-agent
+  366  aws --version
+  367  sudo yum remove -y awscli
+  368  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  369  unzip awscliv2.zip
+  370  sudo ./aws/install
+  371  rm -rf awscliv2.zip aws
+  372  aws --version
+  373  echo "===== AWS SSM Agent Status ====="
+  374  sudo systemctl status amazon-ssm-agent --no-pager
+  375  systemctl status qualys-cloud-agent.service
+  376  systemctl status taniumclient
+  377  systemctl status qualys-cloud-agent.service
+  378  systemctl status taniumclient
+  379  systemctl status SplunkForwarder.service
+  380  systemctl status qualys-cloud-agent.service
+  381  cls
+  382  clear
+  383  systemctl status qualys-cloud-agent.service
+  384  systemctl status taniumclient
+  385  systemctl status SplunkForwarder.service
+  386  systemctl status qualys-cloud-agent.service
+  387  systemctl status SplunkForwarder.service
+  388  systemctl status taniumclient
+  389  systemctl status qualys-cloud-agent.service
+  390  clear
+  391  systemctl status qualys-cloud-agent.service
+  392  systemctl status taniumclient
+  393  systemctl status SplunkForwarder.service
+  394  ls
+  395  cd ..
+  396  cd..
+  397  cd ..
+  398  ls
+  399  cd tmp/
+  400  ls
+  401  sudo rpm -Uvh Linux_RPM_QualysCloudAgent.x86_64.rpm
+  402  ls
+  403  sudo rpm -Uvh Linux_RPM_QualysCloudAgent.x86_64.rpm
+  404  sudo rpm -Uvh Linux_RPM_QualysCloudAgent.x86_64_7.1.0.37.rpm
+  405  sudo rpm -Uvh Linux_RPM_QualysCloudAgent.x86_64.rpm
+  406  systemctl status qualys-cloud-agent.service
+  407  sudo /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh ActivationId=e7e5f786-fc2c-47f5-b394-935985e3d5d9 CustomerId=af433332-5b18-7be7-e040-10ac130451e8 ServerUri=https://qagpublic.qg1.apps.qualys.com/CloudAgent/
+  408  dnf update amazon-cloudwatch-agent --releasever 2023.10.20260325 or dnf update --advisory ALAS2023-2026-1473 --releasever 2023.10.20260325
+  409  cd..
+  410  cd ..
+  411  sudo su
+  412  exit
+  413  ls
+  414  cd ..
+  415  ls
+  416  /etc/ssh/
+  417  cd etc/ssh
+  418  ls
+  419  vi sshd_config
+  420  sudo su
+  421  exit
+  422  systemctl status qualys-cloud-agent.service
+  423  systemctl status taniumclient
+  424  systemctl status mdatp
+  425  systemctl status SplunkForwarder.service
+  426  sudo systemctl status amazon-ssm-agent --no-pager
+  427  exit
+  428  sudo sed -i 's/\r$//' protecting_accenture_fix_FinalFixed_29Apr2026.sh
+  429  chmod +x protecting_accenture_fix_FinalFixed_29Apr2026.sh
+  430  sudo bash protecting_accenture_fix_FinalFixed_29Apr2026.sh
+  431  ls
+  432  ls -lrta
+  433  cd /etc
+  434  ls
+  435  cat profile
+  436  cat profile.290426111617.bak
+  437  cd /home/ec2-user/
+  438  ls
+  439  sudo sed -i 's/\r$//' protecting_accenture_fix_FinalFixed_29Apr2026.sh
+  440  chmod +x protecting_accenture_fix_FinalFixed_29Apr2026.sh
+  441  sudo bash protecting_accenture_fix_FinalFixed_29Apr2026.sh
+  442  cat /etc/profile
+  443  vi /etc/profile
+  444  exit
+  445  sudo su
+  446  exit
+  447  sudo su
+  448  exit
+  449  sudo su
+  450  exit
+  451  sudo su
+  452  exit
+  453  ping -c 2 google.com
+  454  ls
+  455  cd app
+  456  ls
+  457  cls
+  458  export HOST=0.0.0.0
+  459  export AWS_REGION=us-east-1
+  460  npm start
+  461  history
+  462  pm2 logs
+  463  pm2 liat
+  464  pm2 list
+  465  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  466  pm2 logs
+  467  export HOST=0.0.0.0
+  468  export AWS_REGION=us-east-1
+  469  npm start
+  470  pm2 list
+  471  pm2 delete voicebot
+  472  export HOST=0.0.0.0
+  473  export AWS_REGION=us-east-1
+  474  npm start
+  475  curl http://localhost:3000
+  476  ls
+  477  clr
+  478  cls
+  479  clear
+  480  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  481  pm2 logs voicebot --lines 50
+  482  curl http://localhost:3000
+  483  curl -v https://32.198.41.25:3000
+  484  curl -v http://32.198.41.25:3000
+  485  curl -v http://32.198.41.25
+  486  curl -v https://32.198.41.25
+  487  pm2 logs voicebot
+  488  pm2 delete voicebot
+  489  sudo systemctl status nginx
+  490  sudo cat /etc/nginx/conf.d/default.conf
+  491  sudo cat /etc/nginx/sites-enabled/default
+  492  sudo cat /etc/nginx/nginx.conf
+  493  ls /etc/nginx/conf.d/
+  494  ls /etc/nginx/default.d/
+  495  sudo ls /etc/pki/nginx/
+  496  sudo ls /etc/letsencrypt/live/ 2>/dev/null
+  497  sudo cat /etc/nginx/conf.d/voicebot.conf
+  498  sudo ls -la /etc/ssl/certs/selfsigned.crt /etc/ssl/private/selfsigned.key
+  499  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048   -keyout /etc/ssl/private/selfsigned.key   -out /etc/ssl/certs/selfsigned.crt   -subj "/CN=32.198.41.25"
+  500  sudo systemctl reload nginx
+  501  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  502  pm2 logs voicebot
+  503  sudo su
+  504  exit
+  505  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  506  cd app/
+  507  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  508  pm2 logs
+  509  sudo su
+  510  exit
+  511  sudo su
+  512  exit
+  513  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  514  cd app
+  515  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  516  pm2 logs
+  517  cd app
+  518  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  519  pm2 stop voicebot
+  520  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  521  pm2 logs
+  522  git branch --show-current
+  523  pm2 stop voicebot
+  524  git pull
+  525  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  526  pm2 logs
+  527  cd app
+  528  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  529  cd app
+  530  ls
+  531  npm run build
+  532  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  533  pm2 log
+  534  git pull
+  535  pm2 stop voicebot
+  536  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  537  pm2 logs
+  538  cd app
+  539  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  540  sudo su
+  541  exit
+  542  umask
+  543  exit
+  544  cd app
+  545  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  546  git pull
+  547  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  548  pm2 stop  --name voicebot
+  549  pm2 stop voicebot
+  550  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  551  git pull
+  552  pm2 stop voicebot
+  553  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  554  cd app
+  555  git pull
+  556  pm2 stop voicebot
+  557  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  558  git pull
+  559  pm2 stop voicebot
+  560  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  561  git pull
+  562  pm2 stop voicebot
+  563  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  564  cd app
+  565  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  566  cd app
+  567  git pull
+  568  pm2 stop voicebot
+  569  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  570  git pull
+  571  pm2 stop voicebot
+  572  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  573  pm2 stop voicebot
+  574  git pull
+  575  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  576  cd app
+  577  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  578  ls
+  579  ls app
+  580  cd app/
+  581  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  582  sudo systemctl start nginx
+  583  git pull
+  584  pm2 stop voicebot
+  585  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  586  cd app/
+  587  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  588  pm2 stop voicebot
+  589  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  590  pm2 stop voicebot
+  591  git pull
+  592  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  593  git pull
+  594  pm2 stop voicebot
+  595  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  596  pm2 stop voicebot
+  597  git pull
+  598  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  599  pm2 stop voicebot
+  600  git pull
+  601  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  602  pm2 stop voicebot
+  603  git pull
+  604  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  605  pm2 stop voicebot
+  606  git pull
+  607  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  608  pm2 stop voicebot
+  609  git pull
+  610  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  611  pm2 stop voicebot
+  612  git pull
+  613  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  614  ls
+  615  cd app
+  616  ls
+  617  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  618  sudo systemctl start nginx
+  619  cd app
+  620  pm2 stop voicebot
+  621  git pull
+  622  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  623  pm2 stop voicebot
+  624  git pull
+  625  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  626  exit
+  627  cd app
+  628  pm2 stop voicebot
+  629  git pull
+  630  pm2 stop voicebot
+  631  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  632  ls
+  633  cd app/
+  634  ls
+  635  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  636   sudo systemctl start nginx
+  637  cd app
+  638  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  639  pm2 stop voicebot
+  640  git pull
+  641  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  642  pm2 stop voicebot
+  643  git pull
+  644  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  645  cd app
+  646  pm2 stop voicebot
+  647  git pull
+  648  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  649  pm2 stop voicebot
+  650  git pull
+  651  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  652  cd app
+  653  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  654  pm2 stop voicebot
+  655  git pull
+  656  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  657  pm2 stop voicebot
+  658  git pull
+  659  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  660  pm2 stop voicebot
+  661  git pull
+  662  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  663  cd app
+  664  df -0h
+  665  df -h
+  666  pm2 stop voicebot
+  667  git pull
+  668  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  669  pm2 stop voicebot
+  670  git pull
+  671  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  672  cd app
+  673  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  674  cd app
+  675  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  676  pm2 stop voicebot
+  677  git pull
+  678  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  679  pm2 stop voicebot
+  680  git pull
+  681  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  682  pm2 stop voicebot
+  683  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  684  pm2 stop voicebot
+  685  git pull
+  686  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  687  sudo su
+  688  exit
+  689  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  690  pm2 stop voicebot
+  691  cd app/
+  692  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  693  cd app/
+  694  pm2 stop voicebot
+  695  git pull
+  696  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  697  pm2 stop voicebot
+  698  git pull
+  699  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  700  ls
+  701  cd app/
+  702  ls
+  703  npm run build \&\& HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  704  npm run build
+  705  HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  706  sudo systemctl start nginx
+  707  sudo su
+  708  sudo dnf check-update
+  709  sudo dnf check-update --security
+  710  sudo su
+  711  exit
+  712  sudo su
+  713  exit
+  714  sudo su
+  715  exit
+  716  ls
+  717  cd app
+  718  ls
+  719  cat package.json
+  720  ls -la
+  721  pm2 list
+  722  npm start
+  723  ps -ef
+  724  pm2 stop voicebot
+  725  ls
+  726  cd app
+  727  npx pm2 start npm --name voicebot -- start
+  728  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  729  ls
+  730  cd app
+  731  ls
+  732  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  733  ls
+  734  cd app
+  735  ls
+  736  npm run build \&\& HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  737  npm run build && HOST=0.0.0.0 PORT=3000 pm2 start dist/server.js --name voicebot
+  738  pm2 stop voicebot
+  739  ls
+  740  cd app
+  741  ls
+  742  pm2 logs
+  743  pm2 list
+  744  sudo pm2 list
+  745  pm2 list
+  746  git config --list
+  747  git pull
+  748  git branch -show-current
+  749  git branch --show-current
+  750  cls
+  751  clear
+  752  pm2 list
+  753  sudo dnf install -
+  754  sudo dnf install -y nginx
+  755  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048   -keyout /etc/nginx/selfsigned.key   -out /etc/nginx/selfsigned.crt   -subj "/CN=3.238.63.17"
+  756  sudo tee /etc/nginx/conf.d/voicebot.conf > /dev/null <<'EOF'
+server {
+    listen 80;
+    server_name 3.238.63.17;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name 3.238.63.17;
+
+    ssl_certificate     /etc/nginx/selfsigned.crt;
+    ssl_certificate_key /etc/nginx/selfsigned.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 86400;
+    }
+}
+EOF
+
+  757  sudo nginx -t
+  758  sudo systemctl enable --now nginx
+  759  pm2 list
+  760  curl -I http://127.0.0.1:3000
+  761  pm2 stop voicebot
+  762  git config --list
+  763  ls
+  764  cd ..
+  765  cls
+  766  clr
+  767  clear
+  768  ls
+  769  cd app
+  770  ls
+  771  cd ..
+  772  mkdir app-kiro
+  773  ls
+  774  cd app-kiro/
+  775  git clone https://github.com/abdulWaquarAcc/nova-2-sonic-standalone-kiro.git
+  776  git pull
+  777  git fetch --all
+  778  git init
+  779  ls
+  780  cd nova-2-sonic-standalone-kiro/
+  781  git fetch --all
+  782  clear
+  783  git pull
+  784  cd ..
+  785  ls
+  786  cd app
+  787  pm2 list
+  788  pm2 delete voicebot
+  789  pm2 list
+  790  cd ..
+  791  ls
+  792  cd app-kiro
+  793  cd nova-2-sonic-standalone-kiro/
+  794  clear
+  795  history
+[ec2-user@ip-172-31-13-228 nova-2-sonic-standalone-kiro]$

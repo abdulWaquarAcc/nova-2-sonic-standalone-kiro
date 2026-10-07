@@ -1,0 +1,53 @@
+Here's the full step-by-step for Option B. Run these on the EC2 box over SSH as ec2-user.
+
+Install Nginx (Amazon Linux 2023)
+sudo dnf install -y nginx
+If you're on Amazon Linux 2 instead, use: sudo amazon-linux-extras install -y nginx1
+
+Generate the self-signed cert (valid 1 year, keyed to your public IP)
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/nginx/selfsigned.key \
+  -out /etc/nginx/selfsigned.crt \
+  -subj "/CN=3.238.63.17"
+Create the Nginx site config
+sudo tee /etc/nginx/conf.d/voicebot.conf > /dev/null <<'EOF'
+server {
+    listen 80;
+    server_name 3.238.63.17;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name 3.238.63.17;
+
+    ssl_certificate     /etc/nginx/selfsigned.crt;
+    ssl_certificate_key /etc/nginx/selfsigned.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 86400;
+    }
+}
+EOF
+The port-80 block auto-redirects HTTP to HTTPS. The Upgrade/Connection headers and the long proxy_read_timeout keep Socket.IO's WebSocket streaming alive, which this voice app depends on.
+
+Test the config and start Nginx
+sudo nginx -t
+sudo systemctl enable --now nginx
+If Nginx was already running, reload instead: sudo systemctl reload nginx
+
+Make sure the Node app is reachable by Nginx
+Nginx proxies to 127.0.0.1:3000, so the app binding to localhost is fine here. No need for HOST=0.0.0.0 with this setup. Confirm it's up:
+
+
+
+pm2 list
+curl -I http://127.0.0.1:3000
