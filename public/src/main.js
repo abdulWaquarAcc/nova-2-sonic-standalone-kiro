@@ -15,29 +15,16 @@ const ctx = waveformCanvas.getContext('2d');
 const ringCanvas = document.getElementById('ring-canvas');
 const ringCtx = ringCanvas.getContext('2d');
 const themeToggle = document.getElementById('theme-toggle');
-const kiroAvatar = document.getElementById('kiro-avatar');
+const avatarVideo = document.getElementById('avatar-video');
 
-// Kiro avatar talking state
-let avatarMouthResetTimer = null;
-
-function setAvatarTalking(talking) {
-    if (!kiroAvatar) return;
-    kiroAvatar.classList.toggle('talking', talking);
-    if (!talking) {
-        kiroAvatar.style.setProperty('--mouth-level', '0');
-    }
-}
-
-function updateAvatarMouth(rms) {
-    if (!kiroAvatar) return;
-    // Boost and clamp the RMS so mouth movement is clearly visible
-    const level = Math.min(1, rms * 6);
-    kiroAvatar.style.setProperty('--mouth-level', level.toFixed(3));
-    // Safety: if chunks stop arriving without a contentEnd, relax the mouth
-    if (avatarMouthResetTimer) clearTimeout(avatarMouthResetTimer);
-    avatarMouthResetTimer = setTimeout(() => {
-        kiroAvatar.style.setProperty('--mouth-level', '0.15');
-    }, 250);
+// Ensure the avatar video keeps looping continuously
+if (avatarVideo) {
+    const ensureAvatarPlaying = () => {
+        const p = avatarVideo.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+    };
+    avatarVideo.addEventListener('loadeddata', ensureAvatarPlaying, { once: true });
+    avatarVideo.addEventListener('ended', ensureAvatarPlaying);
 }
 
 // Settings elements
@@ -1115,7 +1102,6 @@ function stopStreaming() {
     isStreaming = false;
     clearSessionTimers(); // Clear session timeout timers
     hideSessionWarning();
-    setAvatarTalking(false); // Stop Kiro avatar
 
     if (processor) {
         processor.disconnect();
@@ -1778,8 +1764,6 @@ socket.on('audioOutput', (data) => {
                 // Reset fade state when new speech starts
                 isRingFadingOut = false;
                 ringFadeAlpha = 1;
-                // Kiro avatar starts talking
-                setAvatarTalking(true);
             }
             totalAudioDuration += chunkDuration;
 
@@ -1790,8 +1774,6 @@ socket.on('audioOutput', (data) => {
             }
             const rms = Math.sqrt(sum / audioData.length);
             updateAssistantAudioLevel(rms);
-            // Drive the Kiro avatar's mouth from the assistant audio level
-            updateAvatarMouth(rms);
             
             // Clear any existing fade timer
             if (audioFadeTimer) {
@@ -1832,7 +1814,6 @@ socket.on('contentEnd', (data) => {
             assistantAudioLevel = 0;
             speechStartTime = 0;
             totalAudioDuration = 0;
-            setAvatarTalking(false);
         }
     } else if (data.type === 'AUDIO') {
         // Prevent double triggering if already fading
@@ -1861,8 +1842,6 @@ socket.on('contentEnd', (data) => {
             // Trigger the ring fade out animation
             isRingFadingOut = true;
             targetAssistantAudioLevel = 0;
-            // Kiro avatar stops talking when playback finishes
-            setAvatarTalking(false);
             
             // Reset tracking after fade completes
             setTimeout(() => {
@@ -1889,7 +1868,6 @@ socket.on('bargeIn', (data) => {
     targetAssistantAudioLevel = 0;
     speechStartTime = 0;
     totalAudioDuration = 0;
-    setAvatarTalking(false);
 });
 
 socket.on('toolUse', (data) => {
