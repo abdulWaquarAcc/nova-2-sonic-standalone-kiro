@@ -15,6 +15,30 @@ const ctx = waveformCanvas.getContext('2d');
 const ringCanvas = document.getElementById('ring-canvas');
 const ringCtx = ringCanvas.getContext('2d');
 const themeToggle = document.getElementById('theme-toggle');
+const kiroAvatar = document.getElementById('kiro-avatar');
+
+// Kiro avatar talking state
+let avatarMouthResetTimer = null;
+
+function setAvatarTalking(talking) {
+    if (!kiroAvatar) return;
+    kiroAvatar.classList.toggle('talking', talking);
+    if (!talking) {
+        kiroAvatar.style.setProperty('--mouth-level', '0');
+    }
+}
+
+function updateAvatarMouth(rms) {
+    if (!kiroAvatar) return;
+    // Boost and clamp the RMS so mouth movement is clearly visible
+    const level = Math.min(1, rms * 6);
+    kiroAvatar.style.setProperty('--mouth-level', level.toFixed(3));
+    // Safety: if chunks stop arriving without a contentEnd, relax the mouth
+    if (avatarMouthResetTimer) clearTimeout(avatarMouthResetTimer);
+    avatarMouthResetTimer = setTimeout(() => {
+        kiroAvatar.style.setProperty('--mouth-level', '0.15');
+    }, 250);
+}
 
 // Settings elements
 const settingsToggle = document.getElementById('settings-toggle');
@@ -331,18 +355,22 @@ function initCustomSelects() {
 // Prompt presets cache
 const promptPresets = {};
 
-async function loadPromptPreset(presetName) {
+async function loadPromptPreset(presetName, forceRefresh = false) {
     if (presetName === 'custom') return;
     
-    // Check cache first
-    if (promptPresets[presetName]) {
+    // Check cache first (skipped when forcing a refresh from disk)
+    if (!forceRefresh && promptPresets[presetName]) {
         config.systemPrompt = promptPresets[presetName];
         systemPromptTextarea.value = promptPresets[presetName];
         return;
     }
     
     try {
-        const response = await fetch(`/prompts/${presetName}.md`);
+        // Cache-bust so the browser doesn't serve a stale .md file
+        const url = forceRefresh
+            ? `/prompts/${presetName}.md?t=${Date.now()}`
+            : `/prompts/${presetName}.md`;
+        const response = await fetch(url, { cache: 'no-store' });
         if (response.ok) {
             const content = await response.text();
             promptPresets[presetName] = content;
@@ -409,9 +437,13 @@ async function initSettings() {
         config = { ...config, ...JSON.parse(savedConfig) };
     }
     
-    // Load default system prompt if empty
-    if (!config.systemPrompt || !config.systemPrompt.trim()) {
-        await loadPromptPreset('kiro');
+    // Always load the active preset fresh from disk so file edits win over stale localStorage.
+    // Falls back to 'kiro' when no preset is selected or it was never set.
+    const activePreset = document.querySelector('.custom-select[data-id="prompt-preset"]')?.dataset.value;
+    if (activePreset && activePreset !== 'custom') {
+        await loadPromptPreset(activePreset, true);
+    } else if (!config.systemPrompt || !config.systemPrompt.trim()) {
+        await loadPromptPreset('kiro', true);
     }
 
     // Initialize custom dropdowns
@@ -1083,6 +1115,7 @@ function stopStreaming() {
     isStreaming = false;
     clearSessionTimers(); // Clear session timeout timers
     hideSessionWarning();
+    setAvatarTalking(false); // Stop Kiro avatar
 
     if (processor) {
         processor.disconnect();
@@ -1745,6 +1778,8 @@ socket.on('audioOutput', (data) => {
                 // Reset fade state when new speech starts
                 isRingFadingOut = false;
                 ringFadeAlpha = 1;
+                // Kiro avatar starts talking
+                setAvatarTalking(true);
             }
             totalAudioDuration += chunkDuration;
 
@@ -1755,6 +1790,8 @@ socket.on('audioOutput', (data) => {
             }
             const rms = Math.sqrt(sum / audioData.length);
             updateAssistantAudioLevel(rms);
+            // Drive the Kiro avatar's mouth from the assistant audio level
+            updateAvatarMouth(rms);
             
             // Clear any existing fade timer
             if (audioFadeTimer) {
@@ -1795,6 +1832,7 @@ socket.on('contentEnd', (data) => {
             assistantAudioLevel = 0;
             speechStartTime = 0;
             totalAudioDuration = 0;
+            setAvatarTalking(false);
         }
     } else if (data.type === 'AUDIO') {
         // Prevent double triggering if already fading
@@ -1823,6 +1861,8 @@ socket.on('contentEnd', (data) => {
             // Trigger the ring fade out animation
             isRingFadingOut = true;
             targetAssistantAudioLevel = 0;
+            // Kiro avatar stops talking when playback finishes
+            setAvatarTalking(false);
             
             // Reset tracking after fade completes
             setTimeout(() => {
@@ -1849,6 +1889,7 @@ socket.on('bargeIn', (data) => {
     targetAssistantAudioLevel = 0;
     speechStartTime = 0;
     totalAudioDuration = 0;
+    setAvatarTalking(false);
 });
 
 socket.on('toolUse', (data) => {
